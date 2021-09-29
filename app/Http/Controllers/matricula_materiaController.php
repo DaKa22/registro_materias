@@ -14,9 +14,15 @@ class matricula_materiaController extends Controller
      */
     public function index()
     {
-        return response()->json(Matricula_materia::all());
+        $matricula_materias=matricula_materia::all();
+        return view('matricula_materias.index', ['matricula_materias' => $matricula_materias]);
     }
-
+    public function imprimir()
+    {
+        $matricula_materias=matricula_materia::all();
+        $pdf= \PDF::loadView('matricula_materias.imprimir',compact('matricula_materias'));
+        return $pdf->download('matricula_materias.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,89 +41,8 @@ class matricula_materiaController extends Controller
      */
     public function store(Request $request)
     {
-        $Matricula_materia = Matricula_materia::create([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
-        ]);
-        if(!$Matricula_materia){
-            return response()->json([
-                'status' => 'ERROR',
-                'message' => 'El Usuario no fue creado correctamente',
-
-            ]);
-        }
-        else{
-            return response()->json([
-                'status' => 'OK',
-                'message' => 'Ususario creado correctamente',
-                'registro' => $Matricula_materia
-            ]);
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Matricula_materia  $Matricula_materia
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Matricula_materia $Matricula_materia)
-    {
-
-           $consulta= Matricula_materia::where('id',$Matricula_materia->id)->first();
-            if($consulta){
-                return response()->json($consulta);
-            }else{
-                return response()->json([
-                    'status' => 'ERROR',
-                    'message' => 'No existe el Usuario.',
-
-                ]);
-
-            }
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Matricula_materia  $Matricula_materia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Matricula_materia $Matricula_materia)
-    {
-        $consulta= Matricula_materia::where('id',$Matricula_materia->id)->first();
-            if($consulta){
-                return response()->json($consulta);
-            }else{
-                return response()->json([
-                    'status' => 'ERROR',
-                    'message' => 'No existe el Usuario.',
-
-                ]);
-
-            }
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Matricula_materia  $Matricula_materia
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Matricula_materia $Matricula_materia)
-    {
+        if($request->id){
+            $Matricula_materia=Matricula_materia::where('id',$request->id)->first();
         if(!$Matricula_materia) {
             return response()->json([
                 'status' => 'OK',
@@ -140,10 +65,131 @@ class matricula_materiaController extends Controller
             'fecha_nacimiento' => $request['fecha_nacimiento'],
         ]);
         if($Matricula_materia->save()){
+            return redirect()->back()->with([
+
+                'created' => 1,
+                'mensaje' => 'El Matricula_materia se Actualizo correctamente'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'created' => 0,
+                'mensaje' => 'El Matricula_materia NO se Actualizo correctamente'
+            ]);
+        }
+        }
+        $Matricula_materia = Matricula_materia::create([
+            'cedula' => $request['cedula'],
+            'codigo_estudiante' => $request['codigo_estudiante'],
+            'nombre1' => $request['nombre1'],
+            'nombre2' => $request['nombre2'],
+            'apellido1' => $request['apellido1'],
+            'apellido2' => $request['apellido2'],
+            'telefono' => $request['telefono'],
+            'email' => $request['email'],
+            'genero' => $request['genero'],
+            'nacionalidad' => $request['nacionalidad'],
+            'fecha_nacimiento' => $request['fecha_nacimiento'],
+        ]);
+        if($Matricula_materia){
+            return redirect()->back()->with([
+
+                'created' => 1,
+                'mensaje' => 'El Matricula_materia se Creo correctamente'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'created' => 0,
+                'mensaje' => 'El Matricula_materia NO se Creo correctamente'
+            ]);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Matricula_materia  $Matricula_materia
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+
+           $consulta= Matricula_materia::where('id',$id)->first();
+            if($consulta){
+                return response()->json($consulta);
+            }else{
+                return response()->json([
+                    'status' => 'ERROR',
+                    'message' => 'No existe el Usuario.',
+
+                ]);
+
+            }
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Matricula_materia  $Matricula_materia
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $consulta= Matricula_materia::where('id',$id)->first();
+            if($consulta){
+                return response()->json($consulta);
+            }else{
+                return response()->json([
+                    'status' => 'ERROR',
+                    'message' => 'No existe el Usuario.',
+
+                ]);
+
+            }
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Matricula_materia  $Matricula_materia
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $Matricula_materia=Matricula_materia::where('id',$id)->first();
+        if(!$Matricula_materia) {
             return response()->json([
                 'status' => 'OK',
-                'message' => 'Matricula_materia actualizado correctamente',
-                'registro' => $Matricula_materia
+                'message' => 'No existe el Matricula_materia.',
+                'registro' => []
+            ]);
+        }
+
+        $Matricula_materia->update([
+            'cedula' => $request['cedula'],
+            'codigo_estudiante' => $request['codigo_estudiante'],
+            'nombre1' => $request['nombre1'],
+            'nombre2' => $request['nombre2'],
+            'apellido1' => $request['apellido1'],
+            'apellido2' => $request['apellido2'],
+            'telefono' => $request['telefono'],
+            'email' => $request['email'],
+            'genero' => $request['genero'],
+            'nacionalidad' => $request['nacionalidad'],
+            'fecha_nacimiento' => $request['fecha_nacimiento'],
+        ]);
+        if($Matricula_materia->save()){
+            return redirect()->back()->with([
+
+                'created' => 1,
+                'mensaje' => 'El Matricula_materia se Actualizo correctamente'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'created' => 0,
+                'mensaje' => 'El Matricula_materia NO se Actualizo correctamente'
             ]);
         }
 
@@ -156,19 +202,20 @@ class matricula_materiaController extends Controller
      * @param  \App\Models\Matricula_materia  $Matricula_materia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Matricula_materia $Matricula_materia)
+    public function destroy($id)
     {
-        $Matricula_materia = Matricula_materia::find($Matricula_materia);
+        $Matricula_materia=Matricula_materia::where('id',$id)->first();
+
         if ($Matricula_materia->delete()) {
             return redirect()->back()->with([
 
                 'created' => 1,
-                'mensaje' => 'El usuario se Elimino correctamente'
+                'mensaje' => 'El Matricula_materia se Elimino correctamente'
             ]);
         } else {
             return redirect()->back()->with([
                 'created' => 0,
-                'mensaje' => 'El usuario NO se Elimino correctamente'
+                'mensaje' => 'El Matricula_materia NO se Elimino correctamente'
             ]);
         }
     }
