@@ -53,17 +53,9 @@ class periodos_academicoController extends Controller
         }
 
         $Periodos_academico->update([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
+            'codigo' => $request['codigo'],
+            'descripcion' => $request['descripcion'],
+
         ]);
         if($Periodos_academico->save()){
             return redirect()->back()->with([
@@ -79,17 +71,9 @@ class periodos_academicoController extends Controller
         }
         }
         $Periodos_academico = Periodos_academico::create([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
+            'codigo' => $request['codigo'],
+            'descripcion' => $request['descripcion'],
+
         ]);
         if($Periodos_academico){
             return redirect()->back()->with([

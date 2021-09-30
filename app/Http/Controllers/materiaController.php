@@ -52,17 +52,8 @@ class materiaController extends Controller
         }
 
         $Materia->update([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
+            'codigo_materia' => $request['codigo_materia'],
+            'descripcion' => $request['descripcion'],
         ]);
         if($Materia->save()){
             return redirect()->back()->with([
@@ -78,17 +69,9 @@ class materiaController extends Controller
         }
         }
         $Materia = Materia::create([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
+            'codigo_materia' => $request['codigo_materia'],
+            'descripcion' => $request['descripcion'],
+
         ]);
         if($Materia){
             return redirect()->back()->with([

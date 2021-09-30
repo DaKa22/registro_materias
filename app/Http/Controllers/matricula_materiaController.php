@@ -52,17 +52,10 @@ class matricula_materiaController extends Controller
         }
 
         $Matricula_materia->update([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
+            'users_id' => $request['users_id'],
+            'periodos_academicos_id' => $request['periodos_academicos_id'],
+            'materias_id' => $request['materias_id'],
+
         ]);
         if($Matricula_materia->save()){
             return redirect()->back()->with([
@@ -78,17 +71,9 @@ class matricula_materiaController extends Controller
         }
         }
         $Matricula_materia = Matricula_materia::create([
-            'cedula' => $request['cedula'],
-            'codigo_estudiante' => $request['codigo_estudiante'],
-            'nombre1' => $request['nombre1'],
-            'nombre2' => $request['nombre2'],
-            'apellido1' => $request['apellido1'],
-            'apellido2' => $request['apellido2'],
-            'telefono' => $request['telefono'],
-            'email' => $request['email'],
-            'genero' => $request['genero'],
-            'nacionalidad' => $request['nacionalidad'],
-            'fecha_nacimiento' => $request['fecha_nacimiento'],
+            'users_id' => $request['users_id'],
+            'periodos_academicos_id' => $request['periodos_academicos_id'],
+            'materias_id' => $request['materias_id'],
         ]);
         if($Matricula_materia){
             return redirect()->back()->with([
