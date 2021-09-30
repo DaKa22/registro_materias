@@ -23,6 +23,8 @@ class userController extends Controller
     {
         $users=user::all();
         $pdf= \PDF::loadView('users.imprimir',compact('users'));
+        $pdf->setPaper('A4', 'landscape');
+
         return $pdf->download('users.pdf');
     }
 
