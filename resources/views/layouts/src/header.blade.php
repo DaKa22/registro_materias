@@ -32,18 +32,26 @@
 
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index.html" class="logo logo-dark">
+                <a href="/" class="logo logo-dark">
                     <span class="logo-sm">
+<<<<<<< HEAD
                         <img src={{assets('assets/images/logo-sm-dark.png')}} alt="" height="22">
+=======
+                        <img src="{{assets('assets/images/logo-sm-dark.png')}}" alt="" height="22">
+>>>>>>> 5c8cc0c634f4b3b0593c50b505662042ec8dcb73
                     </span>
                     <span class="logo-lg">
                         <img src={{{{ asset('assets/images/logo-dark.png') }}}} alt="" height="20">
                     </span>
                 </a>
 
-                <a href="index.html" class="logo logo-light">
+                <a href="/" class="logo logo-light">
                     <span class="logo-sm">
+<<<<<<< HEAD
                         <img src={{{{ asset('assets/images/logo-sm-light.png') }}}} alt="" height="22">
+=======
+                        <img src={{assets('assets/images/logo-sm-light.png')}} alt="" height="22">
+>>>>>>> 5c8cc0c634f4b3b0593c50b505662042ec8dcb73
                     </span>
                     <span class="logo-lg">
                         <img src={{{{ asset('assets/images/logo-light.png') }}}} alt="" height="20">
